@@ -84,4 +84,13 @@ public class AuthController {
 
         return ResponseEntity.ok(authResponse);
     }
+
+    @GetMapping("/hash-password")
+    public ResponseEntity<?> hashPassword(@RequestParam String password) {
+        String hashedPassword = passwordEncoder.encode(password);
+        return ResponseEntity.ok(new java.util.HashMap<String, String>() {{
+            put("password", password);
+            put("hashed", hashedPassword);
+        }});
+    }
 }
